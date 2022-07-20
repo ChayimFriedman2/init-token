@@ -15,7 +15,7 @@ init_token::init! {
 }
 ```
 
-`init_big!` is intended for cases where the static value is very big, too big to pass on stack, and thus returning it from the initializer is problematic. Instead, you provide a const initializer, and then at the end you provide code to initialize the static, assuming `NAME_OF_STATIC` is a mutable reference to the type of the static. An example will explain better:
+`init_big!` is intended for cases where the static value is very big, too big to pass on stack, and thus returning it from the initializer is problematic. Instead, you provide a const initializer, and then `init(name) { init_code }`, where `name` will be a mutable reference to the content of the static. An example will explain better:
 
 ```rust
 init_token::init_big! {
@@ -27,8 +27,10 @@ init_token::init_big! {
     pub static MY_STATIC: i32 = 0;
 
     // Now, we write code to calculate the static and assign to it as we wish.
-    // `MY_STATIC` here is a pointer to `MY_STATIC` and has the type `&mut i32`.
-    *MY_STATIC = std::env::var("MY_STATIC").unwrap().parse().unwrap();
+    // `my_static` here is a pointer to `MY_STATIC` and has the type `&mut i32`.
+    init(my_static) {
+        *my_static = std::env::var("MY_STATIC").unwrap().parse().unwrap();
+    }
 }
 ```
 
