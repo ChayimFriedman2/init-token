@@ -1,0 +1,16 @@
+[package]
+name = "init-token"
+version = "0.1.0"
+edition = "2021"
+authors = ["Chayim Refael Friedman"]
+description = "A crate for one-time safe initialization of static, without overhead."
+license = "MIT"
+homepage = "https://github.com/ChayimFriedman2/init-token"
+repository = "https://github.com/ChayimFriedman2/init-token"
+readme = "README.md"
+categories = ["rust-patterns", "memory-management"]
+keywords = ["static", "init", "token"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
