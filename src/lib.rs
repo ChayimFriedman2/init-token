@@ -109,14 +109,14 @@ macro_rules! init_big {
 ///
 /// Example code:
 /// ```
-/// init! {
+/// init_token::init! {
 ///     /// The magic token to get [`MY_STATIC`] working.
 ///     pub token MyToken;
 ///     /// My cool static.
 ///     pub static MY_STATIC: i32 = std::env::var("MY_STATIC").unwrap().parse().unwrap();
 /// }
 ///
-/// init_big! {
+/// init_token::init_big! {
 ///     /// The magic token to get [`MY_BIG_STATIC`] working.
 ///     pub token MyBigToken;
 ///     /// My cool static.
