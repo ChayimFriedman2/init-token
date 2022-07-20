@@ -1,8 +1,8 @@
 A crate for one-time safe initialization of static, without overhead.
 
-There are multiple ways to initialize `static`s in Rust. The most common is [`lazy_static`](https://docs.rs/lazy_static) or [`once_cell`](https://docs.rs/once_cell) that is [even being integrated into the standard library](https://doc.rust-lang.org/nightly/std/cell/struct.LazyCell.html). Those crates lazily-initialize the value. The problem is that this incurs an overhead for each access, very small but this is a problem for some applications.
+There are multiple ways to initialize `static`s in Rust. The most common is [`lazy_static`](https://docs.rs/lazy_static) or [`once_cell`](https://docs.rs/once_cell) that is [even being integrated into the standard library](https://doc.rust-lang.org/nightly/std/cell/struct.LazyCell.html). Those crates lazily-initialize the value. The problem is that this incurs an overhead for each access, very small overhead but this is a problem for some applications.
 
-This crate proposes another approach: an initialization that produces a zero sized access token that you can then use to access the value via `Deref`.
+This crate proposes another approach: initialization that produces a zero sized access token that you can then use to access the value via `Deref`.
 
 There are two options on how to do that: [`init!`](https://docs.rs/init-token/latest/init_token/macro.init.html) and [`init_big!`](https://docs.rs/init-token/latest/init_token/macro.init.html). `init!` should be the default choice. Its syntax is like the following:
 
@@ -15,7 +15,7 @@ init_token::init! {
 }
 ```
 
-`init_big!` is intended for cases where the static value is very big, too big to pass on stack, and thus returning it from the initializer is problematic. Instead, you provide a const initializer, and then `init(name) { init_code }`, where `name` will be a mutable reference to the content of the static. An example will explain better:
+`init_big!` is intended for cases where the static value is very big, too big to pass on stack, and thus returning it from the initializer is problematic. Instead, you provide a const initializer, and then `init(name) { init_code }`, where `name` will be a mutable reference to the contents of the static. An example will explain better:
 
 ```rust
 init_token::init_big! {

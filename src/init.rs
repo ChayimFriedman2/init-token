@@ -61,6 +61,7 @@ impl<T, Token: TokenWrapper> Static<T, Token> {
     ///
     /// `init()` must have been already called.
     #[doc(hidden)]
+    #[inline]
     pub unsafe fn get_value(&self) -> &T {
         // SAFETY: We can only write to this once in `init()` (precondition), and `init()`
         // was already called so there will be no outstanding mutable references.
