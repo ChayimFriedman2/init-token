@@ -130,6 +130,8 @@ macro_rules! init_big {
 /// ```
 #[cfg(doc)]
 pub mod example {
+    #![deny(unsafe_code)]
+
     init! {
         /// The magic token to get [`MY_STATIC`] working.
         pub token MyToken;
