@@ -98,6 +98,7 @@ macro_rules! init_big {
                 $const_init,
                 |value| {
                     // SAFETY: We're allowed to do that, see `init_big::Static::new()`.
+                    #[allow(unsafe_code)]
                     let value = unsafe { $crate::sync_unsafe_cell::SyncUnsafeCell::get_mut(value) };
                     (|$runtime_init_param_name: &mut $type| { $($runtime_init)+ })(value)
                 },

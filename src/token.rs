@@ -83,6 +83,7 @@ macro_rules! token {
                 // SAFETY: The token can only be created by calling `Token::new()`
                 // (precondition of `TokenWrapper`).
                 // A precondition of `Token::new()` is that `init()` was called.
+                #[allow(unsafe_code)]
                 unsafe { $crate::$static_mod::Static::get_value(&$static_name) }
             }
         }
