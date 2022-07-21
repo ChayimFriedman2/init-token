@@ -128,7 +128,7 @@ macro_rules! init_big {
 ///     }
 /// }
 /// ```
-#[cfg(doc)]
+#[cfg(any(doc, test))]
 pub mod example {
     #![deny(unsafe_code)]
 
